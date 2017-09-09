@@ -1,9 +1,42 @@
-.header {
+body {
+  background-image: url(img/pharmacy_background.jpg);
+}
+.title {
   position: fixed;
-  top: 15%;
+  top: 10%;
   left: 50%;
   transform: translate(-50%,-50%);
+
   font-family: Montserrat;
+  font-size: 3em;
+}
+
+.patientlist {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  height: 70%;
+  width: 60%;
+
+  overflow: scroll;
+}
+
+.patient {
+  position: relative;
+  height: 10%;
+  width: auto;
+  margin-bottom: 2%;
+
+  left: 50%;
+  transform: translateX(-50%);
+
+  background-color: #F5F5F5;
+  border-radius: 5px;
+
+  display: flex;
+  align-items: center;
 }
 
 p {
