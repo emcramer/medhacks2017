@@ -1,7 +1,11 @@
-.title {
+.header {
   position: fixed;
   top: 15%;
   left: 50%;
   transform: translate(-50%,-50%);
-  font-family: 
+  font-family: Montserrat;
+}
+
+p {
+  font-family: Hind;
 }
