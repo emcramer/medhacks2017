@@ -1,5 +1,7 @@
 # Pharmascope NFC Tag Protocol
-Information for structuring the data contained on the NFC tags.
+Information for structuring the data contained on the NFC tags. Information on the tag is stored as a string. Chunks of information used
+to populate database fields are separated between semi-colons (;). One tag will be written permanently as a demo to show that people with
+NFC readers/writers can't mess with system.
 
 Tag Inventory:
 + Black: 
@@ -8,8 +10,6 @@ Tag Inventory:
 + Lime-green:
 + Blue: 
 + Red:
-
-Information on the tag is stored as a string. Chunks of information used to populate database fields are separated between semi-colons (;).
 
 ## Tag Data Structure
 <NDC>;<UID>
