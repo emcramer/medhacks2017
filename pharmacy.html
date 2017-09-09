@@ -9,6 +9,7 @@
     <!-- references -->
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/pharmacy.css"/>
+    <script href="js/refresh"></script>
 
     <!-- fonts -->
     <style>
@@ -28,33 +29,30 @@
 
   <body>
     <div class="title">
-      Pharmascope <a href="https://ericscrum.github.io/medhacks2017/pharmascope.html"><img src="img/pharmascope_logo.png" height="56" width="56"></a>
+      Pharmascope <a href="https://ericscrum.github.io/medhacks2017/pharmascope.html"><img src="img/pharmascope_logo.png" height="56"></a>
     </div>
+
     <div class="subtitle">
       Pharmacy View
     </div>
+
     <div class="orderlist">
       <div class="order container-fluid">
         <div class="ptname col-sm-3">Huang, Alec</div>
-        <div class="ordernum col-sm-3">21938641</div>
-      </div>
-      <div class="order container-fluid">
-        <div class="ptname col-sm-3">Huang, Alec</div>
-        <div class="ordernum col-sm-3">32175123</div>
-      </div>
-      <div class="order container-fluid">
-        <div class="ptname col-sm-3">Huang, Alec</div>
-        <div class="ordernum col-sm-3">21839742</div>
-      </div>
-      <div class="order container-fluid">
-        <div class="ptname col-sm-3">Huang, Alec</div>
-        <div class="ordernum col-sm-3">74216251</div>
-      </div>
-      <div class="order container-fluid">
-        <div class="ptname col-sm-3">Huang, Alec</div>
-        <div class="ordernum col-sm-3">573183</div>
+        <div class="ordernum col-sm-2">21938641</div>
+        <div class="medname col-sm-2">Caffeine</div>
+        <div class="medstrength col-sm">200mg</div>
+        <div class="medform col-sm">tablet</div>
+        <div class="medfrequency col-sm-2">at bedtime</div>
       </div>
     </div>
+
+    <script>
+      var array = new Array(5);
+      var orderlist = document.getElementsByClassName("orderlist");
+      for (i in array) {
+      }
+    </script>
   </body>
 </html>
 <!-- Made by Team Nexus -->
