@@ -10,4 +10,4 @@ Alec, Eric, Ted, Tracy, and Jason
 
 ### Data on NFC Tag:
 + NFC ID
-+ Drug NDC
++ National Drug Code (NDC)
