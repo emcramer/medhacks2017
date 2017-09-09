@@ -2,6 +2,17 @@ body {
   background: url("https://ericscrum.github.io/medhacks2017/img/pharmacy_background.png");
   background-size: cover;
 }
+
+.overlay {
+  height: 100%;
+  width: 100%;
+  background: rgba(255,255,255,.3);
+  overflow: auto;
+  top: 0px;
+  left: 0px;
+  position: fixed;
+}
+
 .title {
   position: fixed;
   top: 20%;
