@@ -1,5 +1,5 @@
 body {
-  background-image: url(img/pharmacy_background.jpg);
+  background-image: url("img/pharmacy_background.png");
 }
 .title {
   position: fixed;
