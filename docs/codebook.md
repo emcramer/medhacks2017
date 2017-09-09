@@ -1,5 +1,5 @@
 # Pharmascope Codebook 
-A description of the database structure for Pharmascope. The database consists of five tables: pt_info, order_info, master_location, history, and security. Each table has a unique row identifier labeled 'ID' as the left-most column.
+A description of the [database](https://docs.google.com/spreadsheets/d/1Ke-UfjN8fhHfZkO4f-gwMgcsSeLbh17hREUghOgtE1o/edit#gid=590828015) structure for Pharmascope. The database consists of five tables: pt_info, order_info, master_location, history, and security. Each table has a unique row identifier labeled 'ID' as the left-most column. 
 
 ## Table: pt_info
 A table containing information about the patient.
