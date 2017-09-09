@@ -26,8 +26,8 @@ ui <- navbarPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
   
-    db_url <- "https://docs.google.com/spreadsheets/d/1Ke-UfjN8fhHfZkO4f-gwMgcsSeLbh17hREUghOgtE1o/edit?usp=sharing"
-    db_ss <- gs_key(extract_key_from_url(db_url))
+  db_url <- "https://docs.google.com/spreadsheets/d/1Ke-UfjN8fhHfZkO4f-gwMgcsSeLbh17hREUghOgtE1o/edit?usp=sharing"
+  db_ss <- gs_key(extract_key_from_url(db_url))
   
   # get the data
   pt_df <- as.data.frame(gs_read(ss = db_ss,ws = 'pt'))
@@ -67,7 +67,11 @@ server <- function(input, output) {
   
   nfcs_orders_df <- full_join(nfcs_df, orders_df2)
   nfcs_orders_pts_df <- full_join(nfcs_orders_df, pt_df2)
-  nfcs_orders_pts_df[is.na(nfcs_orders_pts_df[,2]), 2] <- -1
+  
+  reader_df <- as.data.frame(gs_read(ss = db_ss, ws = 'reader_log'))
+  reader_df <- reader_df[order(reader_df[, 3]), ] # sort by the NFC tag ID
+  
+  nfcs_orders_pts_df[, 2] <- reader_df[, 2]
   
   for(i in 1:nrow(nfcs_orders_pts_df)){
     if(nfcs_orders_pts_df[i, 8] == nfcs_orders_pts_df[i, 2]){
