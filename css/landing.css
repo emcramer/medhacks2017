@@ -1,6 +1,7 @@
 body {
   background: url("https://ericscrum.github.io/medhacks2017/img/pharmacy_background.png");
   background-size: cover;
+  cursor: default;
 }
 
 .title {
