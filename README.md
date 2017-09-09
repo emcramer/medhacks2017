@@ -1,5 +1,5 @@
 # medhacks2017
-repo for MedHacks 2017 Project
+MedHacks 2017 project for streamlining the medication use process.
 
 ### Team Members:
 Alec, Eric, Ted, Tracy, and Jason
@@ -9,6 +9,5 @@ Alec, Eric, Ted, Tracy, and Jason
 
 
 ### Data on NFC Tag:
-+ Order Number
-+ Room and Floor number
-+ Drug code w/dosage
++ NFC ID
++ National Drug Code (NDC)
