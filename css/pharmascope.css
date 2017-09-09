@@ -1,5 +1,6 @@
 body {
-  background-image: url("img/pharmacy_background.png");
+  height: 100vh;
+  background: url("/img/pharmacy_background.png");
 }
 .title {
   position: fixed;
