@@ -13,16 +13,13 @@ library(dplyr)
 library(DT)
 library(tidyverse)
 
+PAGE_TITLE <- "Pharmascope"
+
 # Define UI for application that draws a histogram
-ui <- fluidPage(
-   
-   # Application title
-   titlePanel("Drug Location Data"),
-   
-      # Show a plot of the generated distribution
-      mainPanel(
-         dataTableOutput("the_data")
-      )
+ui <- navbarPage(
+  title = div(img(src = "pharmascope_logo.png", height = 20, width = 20), PAGE_TITLE), # Application title
+  tabPanel("Track Meds", dataTableOutput("the_data")),
+  tabPanel("Miscellaneous", "Placeholder")
 )
 
 
