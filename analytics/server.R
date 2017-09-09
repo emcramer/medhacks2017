@@ -42,7 +42,7 @@ shinyServer(function(input, output) {
   
   output$hist <- renderPlot({
     pie_df <- as.data.frame(table(history_df[, 2]))
-    ggplot(data = pie_df, aes(x="", y = Var1, fill = Freq)) + coord_polar("y", start=0)
+    ggplot(data = pie_df) + geom_histogram(aes(x = Var1, y = Freq, fill = Freq), stat = "identity", bins = nrow(pie_df)) + xlab("NDC Code") + ylab("Frequency") + ggtitle("Frequency of Medications Dispensed")
   })
 
 })
