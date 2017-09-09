@@ -1,0 +1,15 @@
+# Pharmascope NFC Tag Protocol
+Information for structuring the data contained on the NFC tags.
+
+Tag Inventory:
++ Black: 
++ White: 
++ Green:
++ Lime-green:
++ Blue: 
++ Red:
+
+Information on the tag is stored as a string. Chunks of information used to populate database fields are separated between semi-colons (;).
+
+## Tag Data Structure
+<NDC>;<UID>
