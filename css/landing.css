@@ -1,0 +1,60 @@
+body {
+  background: url("https://ericscrum.github.io/medhacks2017/img/pharmacy_background.png");
+  background-size: cover;
+}
+.title {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
+  font-family: Montserrat;
+  font-size: 4em;
+}
+
+.subtitle {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-family: Montserrat;
+  font-size: 1.5em;
+}
+
+.viewbuttons {
+  position: fixed;
+  height: 10%;
+  width: 30%;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.nursebutton {
+  float: left;
+  height: 100%;
+  width: 40%;
+
+  background-color: #F5F5F5;
+  border-radius: 5px;
+  border: 2px solid #0099CC;
+
+  display: flex;
+  align-items: center;
+  justify-content:center;
+}
+
+.pharmacybutton {
+  float: right;
+  height: 100%;
+  width: 40%;
+
+  background-color: #F5F5F5;
+  border-radius: 5px;
+  border: 2px solid #00CC99;
+
+  display: flex;
+  align-items: center;
+  justify-content:center;
+}

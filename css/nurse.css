@@ -1,6 +1,6 @@
 body {
-  height: 100vh;
-  background: url("/img/pharmacy_background.png");
+  background: url("https://ericscrum.github.io/medhacks2017/img/pharmacy_background.png");
+  background-size: cover;
 }
 .title {
   position: fixed;
@@ -12,9 +12,19 @@ body {
   font-size: 3em;
 }
 
+.subtitle {
+  position: fixed;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+
+  font-family: Montserrat;
+  font-size: 2em;
+}
+
 .patientlist {
   position: fixed;
-  top: 20%;
+  top: 25%;
   left: 50%;
   transform: translateX(-50%);
 
@@ -26,15 +36,16 @@ body {
 
 .patient {
   position: relative;
-  height: 10%;
+  height: 15%;
   width: auto;
-  margin-bottom: 2%;
+  margin-bottom: 1%;
 
   left: 50%;
   transform: translateX(-50%);
 
   background-color: #F5F5F5;
   border-radius: 5px;
+  border: 2px solid #0099CC;
 
   display: flex;
   align-items: center;
