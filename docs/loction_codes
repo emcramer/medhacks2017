@@ -1,0 +1,11 @@
+# Location Codes for Demo
+The locations for the hospital are coded by number. Each number/code corresponds to an Android device used in the demo. 
+
+## Codes:
+1. Pharmacy Tech Area/Bench = 0
+2. Pharmacy Tube = 1
+3. Nurse Tube = 2
+4. Med Room = 3
+5. Patient Room = 4
+
+
