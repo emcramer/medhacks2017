@@ -51,6 +51,6 @@ body {
   align-items: center;
 }
 
-p {
-  font-family: Hind;
+.patient:hover {
+  background-color: #DCDCDC;
 }

@@ -22,7 +22,7 @@ body {
   font-size: 1.5em;
 }
 
-.viewbuttons {
+.entrance {
   position: fixed;
   height: 10%;
   width: 30%;
@@ -31,30 +31,29 @@ body {
   transform: translateX(-50%);
 }
 
-.nursebutton {
-  float: left;
+.viewbutton {
   height: 100%;
   width: 40%;
 
   background-color: #F5F5F5;
   border-radius: 5px;
-  border: 2px solid #0099CC;
 
   display: flex;
   align-items: center;
   justify-content:center;
+  color: black;
 }
 
-.pharmacybutton {
+.nurse {
+  float: left;
+  border: 2px solid #0099CC;
+}
+
+.pharmacy {
   float: right;
-  height: 100%;
-  width: 40%;
-
-  background-color: #F5F5F5;
-  border-radius: 5px;
   border: 2px solid #00CC99;
+}
 
-  display: flex;
-  align-items: center;
-  justify-content:center;
+.viewbutton:hover {
+  background-color: #DCDCDC;
 }
