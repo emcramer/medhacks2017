@@ -23,7 +23,7 @@ body {
   font-size: 2em;
 }
 
-.patientlist {
+.orderlist {
   position: fixed;
   top: 25%;
   left: 50%;
@@ -35,7 +35,7 @@ body {
   overflow: scroll;
 }
 
-.patient {
+.order {
   position: relative;
   height: 15%;
   width: auto;
@@ -46,7 +46,7 @@ body {
 
   background-color: #F5F5F5;
   border-radius: 5px;
-  border: 2px solid #0099CC;
+  border: 2px solid #00CC99;
 
   display: flex;
   align-items: center;
