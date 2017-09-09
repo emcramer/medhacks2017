@@ -1,5 +1,5 @@
 # medhacks2017
-repo for MedHacks 2017 Project
+MedHacks 2017 project for streamlining the medication use process.
 
 ### Team Members:
 Alec, Eric, Ted, Tracy, and Jason
