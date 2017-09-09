@@ -9,6 +9,5 @@ Alec, Eric, Ted, Tracy, and Jason
 
 
 ### Data on NFC Tag:
-+ Order Number
-+ Room and Floor number
-+ Drug code w/dosage
++ NFC ID
++ Drug NDC
