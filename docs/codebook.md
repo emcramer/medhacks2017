@@ -14,14 +14,14 @@ A table containing information about the doctor's order.
 + Quantity: number of pills in the doctor's order
 + UID: a unique numerical identifier for the individual unit dose labeled by the NFC tag
 
-## master_location
+## Table: master_location
 An up-to-date table on the location of each unit dose dispensed. The number of rows does not exceed the number of unit doses dispensed.
 + NDC: the NDC code that identifies the drug and its dose
 + UID: a unique numerical identifier for the individual unit dose labeled by the NFC tag
 + Location: the current location of the unit dose dispensed
 + TimeStamp: the time the unit dose was scanned by a scanner
 
-## history
+## Table: history
 A running list of where each unit dose has been. This table grows as more unit doses are dispensed and as each unit dose is scanned. Doses that have been consumed do not reappear. Maintained primarily for analytical purposes.
 + NDC: the NDC code that identifies the drug and its dose
 + UID: a unique numerical identifier for the individual unit dose labeled by the NFC tag
