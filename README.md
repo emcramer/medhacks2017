@@ -4,7 +4,8 @@ Pharmascope is a MedHacks 2017 project for streamlining the medication distribut
 ## Team Members:
 Alec Huang, Eric Cramer, Ted Mao, Tracy Zhang, and Jason He.
 
-![Pharmascope Logo](https://ericscrum.github.io/medhacks2017/img/pharmascope_logo.png)
+![Pharmascope Logo]()
+<img src="https://ericscrum.github.io/medhacks2017/img/pharmascope_logo.png" width="200">
 
 ## Notes
 See `/docs` folder for documentation on project structure.
