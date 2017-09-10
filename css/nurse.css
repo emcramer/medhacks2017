@@ -45,7 +45,7 @@ body {
   left: 50%;
   transform: translateX(-50%);
 
-  background-color: #F5F5F5;
+  background-color: #F0F8FF;
   border-radius: 5px;
   border: 2px solid #0099CC;
 
@@ -54,5 +54,26 @@ body {
 }
 
 .patient:hover {
+  background-color: #DCDCDC;
+}
+
+.order {
+  position: relative;
+  height: 15%;
+  width: auto;
+  margin-bottom: 1%;
+
+  left: 50%;
+  transform: translateX(-50%);
+
+  background-color: #F5FFFA;
+  border-radius: 5px;
+  border: 2px solid #00CC99;
+
+  display: flex;
+  align-items: center;
+}
+
+.order:hover {
   background-color: #DCDCDC;
 }

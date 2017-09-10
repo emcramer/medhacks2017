@@ -58,10 +58,10 @@
       var $order;
       var $ptname;
       var $ordernum;
-      var $medname; $("<div>").addClass("medname col-sm-2");
-      var $medstrength; $("<div>").addClass("medstrength col-sm");
-      var $medform; $("<div>").addClass("medform col-sm");
-      var $medfrequency; $("<div>").addClass("medfrequency col-sm-2");
+      var $medname;
+      var $medstrength
+      var $medform;
+      var $medfrequency;
 
       var pt_info = Get('http://gsx2json.com/api?id=1Ke-UfjN8fhHfZkO4f-gwMgcsSeLbh17hREUghOgtE1o&sheet=1');
       var patients = JSON.parse(pt_info).rows;

@@ -37,7 +37,6 @@ body {
   height: 100%;
   width: 40%;
 
-  background-color: #F5F5F5;
   border-radius: 5px;
 
   display: flex;
@@ -48,11 +47,13 @@ body {
 
 .nurse {
   float: left;
+  background-color: #F0F8FF;
   border: 2px solid #0099CC;
 }
 
 .pharmacy {
   float: right;
+  background-color: #F5FFFA;
   border: 2px solid #00CC99;
 }
 
