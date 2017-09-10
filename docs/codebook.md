@@ -35,7 +35,7 @@ An ecryption table to hide the NDC codes of prescribed medications. For patient 
 + HashCode: a md5 hash code generated from the NDC string using [this](https://www.md5hashgenerator.com/) website.
 
 ### Convert to JSON
-Use the gsx2json api to convert individual tables to JSON objects. The following URLs correspond to the above tables.
+Use the (gsx2json)[http://gsx2json.com/] api to convert individual tables to JSON objects. The following URLs correspond to the above tables.
 + (pt_info)[http://gsx2json.com/api?id=1Ke-UfjN8fhHfZkO4f-gwMgcsSeLbh17hREUghOgtE1o&sheet=1]
 + (order_info)[http://gsx2json.com/api?id=1Ke-UfjN8fhHfZkO4f-gwMgcsSeLbh17hREUghOgtE1o&sheet=2]
 + (master_location)[http://gsx2json.com/api?id=1Ke-UfjN8fhHfZkO4f-gwMgcsSeLbh17hREUghOgtE1o&sheet=3]
