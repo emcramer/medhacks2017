@@ -12,6 +12,7 @@ import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.ExponentialBackOff;
 
+import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.SheetsScopes;
 
 import com.google.api.services.sheets.v4.model.*;
@@ -39,8 +40,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import pub.devrel.easypermissions.AfterPermissionGranted;
@@ -48,17 +51,27 @@ import pub.devrel.easypermissions.EasyPermissions;
 
 public class SheetsWriteActivity extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks {
+
+    int hRow;
+    int oRow;
+
+    String nfcData;
+    String devNum;
+
+    String sendID;
+    String sendNDC;
+    String sendUID;
+    String sendLoc;
+    String sendTS;
+
     GoogleAccountCredential mCredential;
-    private TextView mOutputText;
-    private Button mCallApiButton;
-    ProgressDialog mProgress;
+    TextView mOutputText;
 
     static final int REQUEST_ACCOUNT_PICKER = 1000;
     static final int REQUEST_AUTHORIZATION = 1001;
     static final int REQUEST_GOOGLE_PLAY_SERVICES = 1002;
     static final int REQUEST_PERMISSION_GET_ACCOUNTS = 1003;
 
-    private static final String BUTTON_TEXT = "Call Google Sheets API";
     private static final String PREF_ACCOUNT_NAME = "accountName";
     private static final String[] SCOPES = {SheetsScopes.SPREADSHEETS};
 
@@ -66,49 +79,29 @@ public class SheetsWriteActivity extends AppCompatActivity
     protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sheets_write);
-        LinearLayout activityLayout = new LinearLayout(this);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-        activityLayout.setLayoutParams(lp);
-        activityLayout.setOrientation(LinearLayout.VERTICAL);
-        activityLayout.setPadding(16, 16, 16, 16);
 
-        ViewGroup.LayoutParams tlp = new ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
-
-        mCallApiButton = new Button(this);
-        mCallApiButton.setText(BUTTON_TEXT);
-        mCallApiButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mCallApiButton.setEnabled(false);
-                mOutputText.setText("");
-                getResultsFromApi();
-                mCallApiButton.setEnabled(true);
-            }
-        });
-        activityLayout.addView(mCallApiButton);
-
-        mOutputText = new TextView(this);
-        mOutputText.setLayoutParams(tlp);
-        mOutputText.setPadding(16, 16, 16, 16);
-        mOutputText.setVerticalScrollBarEnabled(true);
-        mOutputText.setMovementMethod(new ScrollingMovementMethod());
-        mOutputText.setText(
-                "Click the \'" + BUTTON_TEXT +"\' button to test the API.");
-        activityLayout.addView(mOutputText);
-
-        mProgress = new ProgressDialog(this);
-        mProgress.setMessage("Calling Google Sheets API ...");
-
-        setContentView(activityLayout);
+        Intent intent = getIntent();
+        nfcData = intent.getStringExtra("nfcData");
 
         // Initialize credentials and service object.
         mCredential = GoogleAccountCredential.usingOAuth2(
                 getApplicationContext(), Arrays.asList(SCOPES))
                 .setBackOff(new ExponentialBackOff());
+
+        sendID = Integer.toString(((Globals) this.getApplication()).incID());
+        String[] split = nfcData.split(";");
+        sendNDC = split[0];
+        sendUID = split[1];
+        sendLoc = ((Globals) this.getApplication()).getDevNum();
+        SimpleDateFormat sDF = new SimpleDateFormat("MM-dd-YYYY-hh-mm-ss");
+        sendTS = sDF.format(new Date());
+
+        hRow = ((Globals) this.getApplication()).incHistoryRow();
+        oRow = ((Globals) this.getApplication()).incOrderRow();
+
+        mOutputText = (TextView) findViewById(R.id.mOutputText);
+
+        getResultsFromApi();
     }
 
     private void getResultsFromApi() {
@@ -117,7 +110,6 @@ public class SheetsWriteActivity extends AppCompatActivity
         } else if (mCredential.getSelectedAccountName() == null) {
             chooseAccount();
         } else if (! isDeviceOnline()) {
-            mOutputText.setText("No network connection available.");
         } else {
             new MakeRequestTask(mCredential).execute();
         }
@@ -155,9 +147,6 @@ public class SheetsWriteActivity extends AppCompatActivity
         switch(requestCode) {
             case REQUEST_GOOGLE_PLAY_SERVICES:
                 if (resultCode != RESULT_OK) {
-                    mOutputText.setText(
-                            "This app requires Google Play Services. Please install " +
-                                    "Google Play Services on your device and relaunch this app.");
                 } else {
                     getResultsFromApi();
                 }
@@ -262,7 +251,7 @@ public class SheetsWriteActivity extends AppCompatActivity
         @Override
         protected List<String> doInBackground(Void... params) {
             try {
-                return getDataFromApi();
+                return writeDataToApi();
             } catch (Exception e) {
                 mLastError = e;
                 cancel(true);
@@ -270,24 +259,42 @@ public class SheetsWriteActivity extends AppCompatActivity
             }
         }
 
-        // Fetch list of names from spreadsheedId
-        private List<String> getDataFromApi() throws IOException {
+        // Write data to spreadsheetId
+        private List<String> writeDataToApi() throws IOException {
             String spreadsheetId = "1Ke-UfjN8fhHfZkO4f-gwMgcsSeLbh17hREUghOgtE1o";
-            String range = "master_location!A2:A3";
             List<String> results = new ArrayList<String>();
 
-            List<List<Object>> values = new ArrayList<>();
-            List<Object> data = new ArrayList<>();
-            data.add("hello");
-            data.add("world");
-            values.add(data);
-            ValueRange response = new ValueRange();
-            response.setMajorDimension("COLUMNS");
-            response.setRange(range);
-            response.setValues(values);
+            String rangeHistory = "history!A"+Integer.toString(hRow)+":E";
+            List<List<Object>> valsHistory = new ArrayList<>();
+            List<Object> dataH = new ArrayList<>();
+            dataH.add(sendID);
+            dataH.add(sendNDC);
+            dataH.add(sendUID);
+            dataH.add(sendLoc);
+            dataH.add(sendTS);
+            valsHistory.add(dataH);
+            ValueRange responseHistory = new ValueRange();
+            responseHistory.setMajorDimension("ROWS");
+            responseHistory.setRange(rangeHistory);
+            responseHistory.setValues(valsHistory);
 
             this.mService.spreadsheets().values()
-                    .update(spreadsheetId, range, response)
+                    .update(spreadsheetId, rangeHistory, responseHistory)
+                    .setValueInputOption("RAW")
+                    .execute();
+
+            String rangeOrder = "order_info!H"+Integer.toString(oRow)+":I";
+            List<List<Object>> valsOrder = new ArrayList<>();
+            List<Object> dataO = new ArrayList<>();
+            dataO.add(sendUID);
+            valsOrder.add(dataO);
+            ValueRange responseOrder = new ValueRange();
+            responseOrder.setMajorDimension("ROWS");
+            responseOrder.setRange(rangeOrder);
+            responseOrder.setValues(valsOrder);
+
+            this.mService.spreadsheets().values()
+                    .update(spreadsheetId, rangeOrder, responseOrder)
                     .setValueInputOption("RAW")
                     .execute();
 
@@ -296,24 +303,14 @@ public class SheetsWriteActivity extends AppCompatActivity
 
         @Override
         protected void onPreExecute() {
-            mOutputText.setText("");
-            mProgress.show();
         }
 
         @Override
         protected void onPostExecute(List<String> output) {
-            mProgress.hide();
-            if (output == null || output.size() == 0) {
-                mOutputText.setText("No results returned.");
-            } else {
-                output.add(0, "Data retrieved using the Google Sheets API:");
-                mOutputText.setText(TextUtils.join("\n", output));
-            }
         }
 
         @Override
         protected void onCancelled() {
-            mProgress.hide();
             if (mLastError != null) {
                 if (mLastError instanceof GooglePlayServicesAvailabilityIOException) {
                     showGooglePlayServicesAvailabilityErrorDialog(
@@ -324,11 +321,8 @@ public class SheetsWriteActivity extends AppCompatActivity
                             ((UserRecoverableAuthIOException) mLastError).getIntent(),
                             SheetsWriteActivity.REQUEST_AUTHORIZATION);
                 } else {
-                    mOutputText.setText("The following error occurred:\n"
-                            + mLastError.getMessage());
                 }
             } else {
-                mOutputText.setText("Request cancelled.");
             }
         }
     }

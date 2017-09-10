@@ -11,7 +11,7 @@
     android:gravity="center"
     tools:context="edujjasonhe.stanford.pharmascope.SheetsTestActivity">
 
-    <EditText
+    <TextView
         android:id="@+id/et_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
