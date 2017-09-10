@@ -96,10 +96,10 @@
       var $medfrequency;
       var $scanned;
 
-      var pt_info = Get('http://gsx2json.com/api?id=1Ke-UfjN8fhHfZkO4f-gwMgcsSeLbh17hREUghOgtE1o&sheet=1');
+      var pt_info = Get('http://gsx2json.com/api?id=1deQm1gLZMwScBEC9x_q4Slc4N6Yig2M7YIBQru9hleE&sheet=1');
       var patients = JSON.parse(pt_info).rows;
 
-      var order_info = Get('http://gsx2json.com/api?id=1Ke-UfjN8fhHfZkO4f-gwMgcsSeLbh17hREUghOgtE1o&sheet=2');
+      var order_info = Get('http://gsx2json.com/api?id=1deQm1gLZMwScBEC9x_q4Slc4N6Yig2M7YIBQru9hleE&sheet=2');
       var orders = JSON.parse(order_info).rows;
 
       var pt_orders;
@@ -109,8 +109,7 @@
         pt_orders = String(patients[patient].ordernum).split(";");
           for (order in pt_orders) {
             pt_dict.push({
-              ordernum: pt_orders[order],
-              pt_name: patients[patient].name
+              pt_name: patients[patient].name,
             });
           }
       }
@@ -127,21 +126,23 @@
 
         if(toggle_counter % 2 != 0) {
           for (order in orders) {
-            $order = $("<div>").addClass("order container-fluid");
-            $ordernum = $("<div>").addClass("ordernum col-sm-2").text(orders[order].ordernum);
-            $medname = $("<div>").addClass("medname col-sm-2").text(orders[order].medname);
-            $medstrength = $("<div>").addClass("medstrength col-sm").text(orders[order].strength);
-            $medform = $("<div>").addClass("medform col-sm").text(orders[order].medform);
-            $medfrequency = $("<div>").addClass("medfrequency col-sm-2").text(orders[order].quantity + " time(s) a day");
-            $scanned = $("<div>").addClass("scanned col-sm").text("scanned");
+            if (selected_patient == pt_dict[order].pt_name) {
+              $order = $("<div>").addClass("order container-fluid");
+              $ordernum = $("<div>").addClass("ordernum col-sm-2").text(orders[order].ordernum);
+              $medname = $("<div>").addClass("medname col-sm-2").text(orders[order].medname);
+              $medstrength = $("<div>").addClass("medstrength col-sm").text(orders[order].strength);
+              $medform = $("<div>").addClass("medform col-sm").text(orders[order].medform);
+              $medfrequency = $("<div>").addClass("medfrequency col-sm-2").text(orders[order].quantity + " time(s) a day");
+              $scanned = $("<div>").addClass("scanned col-sm").text("scanned");
 
-            $(".patientlist").append($order);
-            $(".order").last().append($ordernum);
-            $(".order").last().append($medname);
-            $(".order").last().append($medstrength);
-            $(".order").last().append($medform);
-            $(".order").last().append($medfrequency);
-            $(".order").last().append($scanned);
+              $(".patientlist").append($order);
+              $(".order").last().append($ordernum);
+              $(".order").last().append($medname);
+              $(".order").last().append($medstrength);
+              $(".order").last().append($medform);
+              $(".order").last().append($medfrequency);
+              $(".order").last().append($scanned);
+            }
           }
         } else {
           $(".order").animate({ height: 'toggle', opacity: 'toggle' }, '600', function(){

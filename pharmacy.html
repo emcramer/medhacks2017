@@ -63,10 +63,10 @@
       var $medform;
       var $medfrequency;
 
-      var pt_info = Get('http://gsx2json.com/api?id=1Ke-UfjN8fhHfZkO4f-gwMgcsSeLbh17hREUghOgtE1o&sheet=1');
+      var pt_info = Get('http://gsx2json.com/api?id=1deQm1gLZMwScBEC9x_q4Slc4N6Yig2M7YIBQru9hleE&sheet=1');
       var patients = JSON.parse(pt_info).rows;
 
-      var order_info = Get('http://gsx2json.com/api?id=1Ke-UfjN8fhHfZkO4f-gwMgcsSeLbh17hREUghOgtE1o&sheet=2');
+      var order_info = Get('http://gsx2json.com/api?id=1deQm1gLZMwScBEC9x_q4Slc4N6Yig2M7YIBQru9hleE&sheet=2');
       var orders = JSON.parse(order_info).rows;
 
       var pt_orders;

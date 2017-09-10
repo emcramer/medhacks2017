@@ -27,7 +27,7 @@ body {
 .entrance {
   position: fixed;
   height: 10%;
-  width: 30%;
+  width: 50%;
   top: 50%;
   left: 50%;
   transform: translateX(-50%);
@@ -35,7 +35,7 @@ body {
 
 .viewbutton {
   height: 100%;
-  width: 40%;
+  width: 25%;
 
   border-radius: 5px;
 
@@ -52,9 +52,18 @@ body {
 }
 
 .pharmacy {
-  float: right;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: #F5FFFA;
   border: 2px solid #00CC99;
+}
+
+.analytics {
+  float: right;
+  background-color: #F5F5F5;
+  border: 2px solid #DCDCDC;
 }
 
 .viewbutton:hover {
