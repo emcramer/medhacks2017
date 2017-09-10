@@ -9,6 +9,6 @@ Alec Huang, Eric Cramer, Ted Mao, Tracy Zhang, and Jason He.
 ## Notes
 See `/docs` folder for documentation on project structure.
 
-(Check out our slide show!)[https://docs.google.com/presentation/d/e/2PACX-1vRrt-Al-vfMT1XxXEDreADcSOvtUEMk0yfQ4jeKgnahqCPKXBSH_MxtfA-4aIlFSjtOVj60fF6da43s/pub?start=false&loop=false&delayms=3000]
+[Check out our slide show!](https://docs.google.com/presentation/d/e/2PACX-1vRrt-Al-vfMT1XxXEDreADcSOvtUEMk0yfQ4jeKgnahqCPKXBSH_MxtfA-4aIlFSjtOVj60fF6da43s/pub?start=false&loop=false&delayms=3000)
 
 _Special thanks to Elsevier mentors for feedback_
