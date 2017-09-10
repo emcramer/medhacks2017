@@ -12,4 +12,4 @@ Tag Inventory:
 + Red:
 
 ## Tag Data Structure
-<NDC>;<Unique ID>;<Lot #>;<EXP date>
+<NDC>;<Unique ID or NFCID>;<Lot #>;<EXP date>
