@@ -63,10 +63,10 @@
       var $medform; $("<div>").addClass("medform col-sm");
       var $medfrequency; $("<div>").addClass("medfrequency col-sm-2");
 
-      var pt_info = Get('https://gsx2json.com/api?id=1Ke-UfjN8fhHfZkO4f-gwMgcsSeLbh17hREUghOgtE1o&sheet=1');
+      var pt_info = Get('http://gsx2json.com/api?id=1Ke-UfjN8fhHfZkO4f-gwMgcsSeLbh17hREUghOgtE1o&sheet=1');
       var patients = JSON.parse(pt_info).rows;
 
-      var order_info = Get('https://gsx2json.com/api?id=1Ke-UfjN8fhHfZkO4f-gwMgcsSeLbh17hREUghOgtE1o&sheet=2');
+      var order_info = Get('http://gsx2json.com/api?id=1Ke-UfjN8fhHfZkO4f-gwMgcsSeLbh17hREUghOgtE1o&sheet=2');
       var orders = JSON.parse(order_info).rows;
 
       var pt_orders;
