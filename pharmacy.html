@@ -9,7 +9,7 @@
     <!-- references -->
     <link rel="stylesheet" href="css/bootstrap.css"/>
     <link rel="stylesheet" href="css/pharmacy.css"/>
-    <script href="js/refresh"></script>
+    <script src="js/jquery-3.2.1.min.js"></script>
 
     <!-- fonts -->
     <style>
@@ -37,20 +37,41 @@
     </div>
 
     <div class="orderlist">
-      <div class="order container-fluid">
+      <!-- <div class="order container-fluid">
         <div class="ptname col-sm-3">Huang, Alec</div>
         <div class="ordernum col-sm-2">21938641</div>
         <div class="medname col-sm-2">Caffeine</div>
         <div class="medstrength col-sm">200mg</div>
         <div class="medform col-sm">tablet</div>
-        <div class="medfrequency col-sm-2">at bedtime</div>
-      </div>
+        <div class="medfrequency col-sm-2">1 time(s) a day</div>
+      </div> -->
     </div>
 
     <script>
-      var array = new Array(5);
-      var orderlist = document.getElementsByClassName("orderlist");
-      for (i in array) {
+      var $order;
+      var $ptname;
+      var $ordernum;
+      var $medname; $("<div>").addClass("medname col-sm-2");
+      var $medstrength; $("<div>").addClass("medstrength col-sm");
+      var $medform; $("<div>").addClass("medform col-sm");
+      var $medfrequency; $("<div>").addClass("medfrequency col-sm-2");
+
+      for(i = 0; i < 5; i++) {
+        $order = $("<div>").addClass("order container-fluid");
+        $ptname = $("<div>").addClass("ptname col-sm-3").text("Alec");
+        $ordernum = $("<div>").addClass("ordernum col-sm-2").text(i);
+        $medname = $("<div>").addClass("medname col-sm-2").text(i);
+        $medstrength = $("<div>").addClass("medstrength col-sm").text(i);
+        $medform = $("<div>").addClass("medform col-sm").text(i);
+        $medfrequency = $("<div>").addClass("medfrequency col-sm-2").text(i);
+
+        $(".orderlist").append($order);
+        $(".order").last().append($ptname);
+        $(".order").last().append($ordernum);
+        $(".order").last().append($medname);
+        $(".order").last().append($medstrength);
+        $(".order").last().append($medform);
+        $(".order").last().append($medfrequency);
       }
     </script>
   </body>
