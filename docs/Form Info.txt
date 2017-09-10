@@ -1,0 +1,9 @@
+Form Info
+
+URL: https://docs.google.com/forms/d/e/1FAIpQLSftM95uTc1omBUS88o82QGmMbaz61_BxvINEI8wT95-5Hu4UA/formResponse
+
+NFCID - entry.1607339597
+NDC - entry.949584210
+Location - entry.2124242561
+
+https://spreadsheets.google.com/feeds/cells/1deQm1gLZMwScBEC9x_q4Slc4N6Yig2M7YIBQru9hleE/ounziwr/public/values?alt=json-in-script&callback=sheetLoaded
