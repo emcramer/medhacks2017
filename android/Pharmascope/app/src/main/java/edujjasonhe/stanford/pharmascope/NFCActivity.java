@@ -16,7 +16,6 @@ import android.nfc.tech.Ndef;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class NFCActivity extends AppCompatActivity {
@@ -24,7 +23,6 @@ public class NFCActivity extends AppCompatActivity {
     public static final String MIME_TEXT_PLAIN = "text/plain";
     public static final String TAG = "NfcDemo";
 
-    TextView tV;
     NfcAdapter mNfcAdapter;
 
     @Override
@@ -32,18 +30,12 @@ public class NFCActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nfc);
 
-        tV = (TextView) findViewById(R.id.textView);
-
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
 
         if (mNfcAdapter == null) {
             Toast.makeText(this, "Your device doesn't support NFC :(", Toast.LENGTH_LONG).show();
             finish();
             return;
-        }
-
-        if (!mNfcAdapter.isEnabled()) {
-            tV.setText("Turn on NFC :o");
         }
 
         handleIntent(getIntent());
@@ -150,9 +142,8 @@ public class NFCActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             if (result != null) {
-                tV.setText(result);
-                //Intent intent = new Intent (NFCActivity.this, SheetsWriteActivity.class);
                 Intent intent = new Intent (NFCActivity.this, HistoryActivity.class);
+                //Intent intent = new Intent (NFCActivity.this, OrderActivity.class);
                 intent.putExtra("nfcData", result);
                 startActivity(intent);
             }

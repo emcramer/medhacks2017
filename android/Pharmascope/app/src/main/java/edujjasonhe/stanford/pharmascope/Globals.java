@@ -7,32 +7,35 @@ import android.app.Application;
  */
 
 public class Globals extends Application {
-    private int historyRow = 1;
-    private int orderRow = 1;
-    private int ID = 0;
+
+    private int CNT = 0;
+
+    private int ROW = 2;
+
     private String devNum;
 
-    public void setHistoryRow(int hRow) {
-        this.historyRow = hRow;
+    public int getCNT() {
+        return CNT;
     }
 
-    public int getHistoryRow() {
-        return historyRow;
+    public void incCNT() {
+        CNT += 1;
     }
 
-    public int incHistoryRow() {
-        historyRow = historyRow + 1;
-        return historyRow;
+    public void setCNT(int n) {
+        this.CNT = n;
     }
 
-    public int incOrderRow() {
-        orderRow = orderRow + 1;
-        return orderRow;
+    public int getROW() {
+        return ROW;
     }
 
-    public int incID() {
-        ID = ID + 1;
-        return ID;
+    public void incROW() {
+        ROW += 1;
+    }
+
+    public void setROW(int n) {
+        this.ROW = n;
     }
 
     public String getDevNum() {
@@ -42,4 +45,5 @@ public class Globals extends Application {
     public void setDevNum(String dN) {
         this.devNum = dN;
     }
+
 }
