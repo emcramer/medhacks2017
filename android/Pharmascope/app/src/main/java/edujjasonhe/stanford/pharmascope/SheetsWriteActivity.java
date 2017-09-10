@@ -46,7 +46,7 @@ import java.util.List;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class SheetsTestActivity extends AppCompatActivity
+public class SheetsWriteActivity extends AppCompatActivity
         implements EasyPermissions.PermissionCallbacks {
     GoogleAccountCredential mCredential;
     private TextView mOutputText;
@@ -60,12 +60,12 @@ public class SheetsTestActivity extends AppCompatActivity
 
     private static final String BUTTON_TEXT = "Call Google Sheets API";
     private static final String PREF_ACCOUNT_NAME = "accountName";
-    private static final String[] SCOPES = {SheetsScopes.SPREADSHEETS_READONLY};
+    private static final String[] SCOPES = {SheetsScopes.SPREADSHEETS};
 
     @Override
     protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sheets_test);
+        setContentView(R.layout.activity_sheets_write);
         LinearLayout activityLayout = new LinearLayout(this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
@@ -238,7 +238,7 @@ public class SheetsTestActivity extends AppCompatActivity
             final int connectionStatusCode) {
         GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
         Dialog dialog = apiAvailability.getErrorDialog(
-                SheetsTestActivity.this,
+                SheetsWriteActivity.this,
                 connectionStatusCode,
                 REQUEST_GOOGLE_PLAY_SERVICES);
         dialog.show();
@@ -273,18 +273,24 @@ public class SheetsTestActivity extends AppCompatActivity
         // Fetch list of names from spreadsheedId
         private List<String> getDataFromApi() throws IOException {
             String spreadsheetId = "1Ke-UfjN8fhHfZkO4f-gwMgcsSeLbh17hREUghOgtE1o";
-            String range = "pt_info!A2:B";
+            String range = "master_location!A2:A3";
             List<String> results = new ArrayList<String>();
-            ValueRange response = this.mService.spreadsheets().values()
-                    .get(spreadsheetId, range)
+
+            List<List<Object>> values = new ArrayList<>();
+            List<Object> data = new ArrayList<>();
+            data.add("hello");
+            data.add("world");
+            values.add(data);
+            ValueRange response = new ValueRange();
+            response.setMajorDimension("COLUMNS");
+            response.setRange(range);
+            response.setValues(values);
+
+            this.mService.spreadsheets().values()
+                    .update(spreadsheetId, range, response)
+                    .setValueInputOption("RAW")
                     .execute();
-            List<List<Object>> values = response.getValues();
-            if (values != null) {
-                results.add("ID, Destination");
-                for (List row : values) {
-                    results.add(row.get(0) + ", " + row.get(1));
-                }
-            }
+
             return results;
         }
 
@@ -316,7 +322,7 @@ public class SheetsTestActivity extends AppCompatActivity
                 } else if (mLastError instanceof UserRecoverableAuthIOException) {
                     startActivityForResult(
                             ((UserRecoverableAuthIOException) mLastError).getIntent(),
-                            SheetsTestActivity.REQUEST_AUTHORIZATION);
+                            SheetsWriteActivity.REQUEST_AUTHORIZATION);
                 } else {
                     mOutputText.setText("The following error occurred:\n"
                             + mLastError.getMessage());

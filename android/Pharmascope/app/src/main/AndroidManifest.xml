@@ -41,7 +41,8 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
-        <activity android:name=".ScopeActivity"></activity>
+        <activity android:name=".ScopeActivity" />
+        <activity android:name=".SheetsWriteActivity"></activity>
     </application>
 
 </manifest>
