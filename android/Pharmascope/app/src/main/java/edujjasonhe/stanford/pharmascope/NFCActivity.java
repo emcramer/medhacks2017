@@ -151,7 +151,8 @@ public class NFCActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             if (result != null) {
                 tV.setText(result);
-                Intent intent = new Intent (NFCActivity.this, SheetsWriteActivity.class);
+                //Intent intent = new Intent (NFCActivity.this, SheetsWriteActivity.class);
+                Intent intent = new Intent (NFCActivity.this, HistoryActivity.class);
                 intent.putExtra("nfcData", result);
                 startActivity(intent);
             }

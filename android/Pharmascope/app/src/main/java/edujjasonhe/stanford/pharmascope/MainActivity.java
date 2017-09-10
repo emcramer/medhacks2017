@@ -18,15 +18,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void click1(View view) {
-        Intent intent = new Intent(this, ScopeActivity.class);
-        //intent.putExtra("devNum", R1);
+        Intent intent = new Intent(this, NFCActivity.class);
+        ((Globals) this.getApplication()).setDevNum(R1);
         startActivity(intent);
     }
 
     public void click2(View view) {
-        Intent intent = new Intent(this, SheetsWriteActivity.class);
-        intent.putExtra("nfcData", "1234;2345;3456;4567");
-        intent.putExtra("devNum", R2);
+        Intent intent = new Intent(this, NFCActivity.class);
+        ((Globals) this.getApplication()).setDevNum(R2);
         startActivity(intent);
     }
 
@@ -37,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void click4(View view) {
-        Intent intent = new Intent(this, SheetsTestActivity.class);
-        intent.putExtra("devNum", R4);
+        Intent intent = new Intent(this, NFCActivity.class);
+        ((Globals) this.getApplication()).setDevNum(R4);
         startActivity(intent);
     }
 

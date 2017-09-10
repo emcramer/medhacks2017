@@ -33,16 +33,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".SheetsTestActivity" />
-        <activity android:name=".NFCActivity2">
-
-            <!--
-            <intent-filter>
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/plain" />
-            </intent-filter>
-            -->
-        </activity>
         <!-- <activity android:name=".ScopeActivity" /> -->
         <activity android:name=".SheetsWriteActivity" />
         <activity android:name=".NFCActivity">
@@ -54,6 +44,7 @@
                 <data android:mimeType="text/plain" />
             </intent-filter>
         </activity>
+        <activity android:name=".HistoryActivity"></activity>
     </application>
 
 </manifest>
