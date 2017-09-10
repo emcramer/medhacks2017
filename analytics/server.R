@@ -59,15 +59,16 @@ shinyServer(function(input, output) {
         'status',
         backgroundColor = styleEqual(c('in transit', 'arrived'), c('gray', 'green'))
       )
-  })
+  })                              
   
   output$chart <- renderPlotly({
+    # difftime <- max(history_df$Timestamp) - min(history_df$Timestamp)
     p <- ggplot(data = history_df) + geom_point(aes(x = Timestamp, y = Location, color = NDC, size = 3))
     ggplotly(p)
   })
   
   output$hist <- renderPlot({
-    pie_df <- as.data.frame(table(history_df[, 3]))
+    pie_df <- as.data.frame(table(status_df$NDC))
     ggplot(data = pie_df) + geom_histogram(aes(x = Var1, y = Freq, fill = Freq), stat = "identity", bins = nrow(pie_df)) + xlab("NDC Code") + ylab("Frequency") + ggtitle("Frequency of Medications Dispensed")
   })
 
