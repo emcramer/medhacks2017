@@ -18,23 +18,47 @@ library(lubridate)
 
 shinyServer(function(input, output) {
   
-  db_url <- "https://docs.google.com/spreadsheets/d/1deQm1gLZMwScBEC9x_q4Slc4N6Yig2M7YIBQru9hleE/edit#gid=1854273697"
+  db_url <- "https://docs.google.com/spreadsheets/d/1deQm1gLZMwScBEC9x_q4Slc4N6Yig2M7YIBQru9hleE/edit#gid=1854273697" # access DB
   db_ss <- gs_key(extract_key_from_url(db_url))
-  history_df <- as.data.frame(gs_read(ss = db_ss, ws = 'history'))
-  history_df[, 1] <- mdy_hms(history_df[, 1])
+  history_df <- as.data.frame(gs_read(ss = db_ss, ws = 'history')) # get the tracker history
+  history_df$Timestamp <- mdy_hms(history_df$Timestamp)
   
-  # dummy data ! REMOVE!
-  # set.seed(123)
-  # history_df <- data.frame(
-  #   ID = 1:15,
-  #   NDC = replicate(15, sample(1:10))[1, ],
-  #   NFCID = paste("T", 1:15, sep = ""),
-  #   Location = replicate(15, sample(1:4))[1, ],
-  #   TimeStamp = seq(ISOdate(2017,09,09), by = "min", length.out = 15)
-  # )
+  # get patient data
+  pt_df <- as.data.frame(gs_read(ss = db_ss, ws = 'pt_info'))
+  pt_orders <- str_split(pt_df$OrderNum, ";")
+  
+  ids <- c()
+  order_nums <- c()
+  destinations <- c()
+  pt_name <- c()
+  for(i in 1:length(pt_orders)){
+    for(j in 1:length(pt_orders[[i]])){
+      order_nums <- c(order_nums, pt_orders[[i]][j])
+      ids <- c(ids, i)
+      destinations <- c(destinations, paste("R",i,sep=""))
+      pt_name <- c(pt_name, pt_df[i, 4])
+    }
+  }
+  pt_df2 <- data.frame(ID = ids, OrderNum = as.integer(order_nums), Destination = destinations)
+  
+  orders_df <- as.data.frame(gs_read(ss = db_ss, ws = 'order_info'))
+  order_nfcs <- str_split(orders_df$UID, ";")
+  
+  nfcid_order_df <- full_join(orders_df[, -1], pt_df2[, -1])
+  current_loc <- history_df[length(history_df$NFCID)-match(unique(history_df$NFCID),rev(history_df$NFCID))+1, ]
+  
+  status_df <- full_join(nfcid_order_df[, -2], current_loc)
+  status_df$Location[is.na(status_df$Location)] <- "R0"
+  for(i in 1:nrow(status_df)){
+    status_df$status[i] <- if(status_df$Destination[i] == status_df$Location[i]) "arrived" else "in transit"
+  }
 
   output$table <- renderDataTable({
-    datatable(history_df) # populate table with unit dose travel history
+    datatable(status_df[, -c(2:5, 7)]) %>% # populate table with unit dose travel history
+      formatStyle(
+        'status',
+        backgroundColor = styleEqual(c('in transit', 'arrived'), c('gray', 'green'))
+      )
   })
   
   output$chart <- renderPlotly({
