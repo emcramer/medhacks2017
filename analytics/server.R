@@ -42,9 +42,25 @@ shinyServer(function(input, output) {
   pt_df2 <- data.frame(ID = ids, OrderNum = as.integer(order_nums), Destination = destinations)
   
   orders_df <- as.data.frame(gs_read(ss = db_ss, ws = 'order_info'))
-  order_nfcs <- str_split(orders_df$UID, ";")
+  order_nfcs <- str_split(orders_df$NFCID, ";")
+  # order_nfcs <- unlist(order_nfcs)
+  for(i in 1:length(order_nfcs)){
+    order_nfcs[[i]] <- order_nfcs[[i]][!order_nfcs[[i]] == ""]
+  }
+
+  ids <- c()
+  ndcs <- c()
+  nfc_nums <- c()
+  for(i in 1:length(order_nfcs)){
+    for(j in 1:length(order_nfcs[[i]])){
+      nfc_nums <- c(nfc_nums, order_nfcs[[i]][j])
+      ids <- c(ids, orders_df$OrderNum[i])
+      ndcs <- c(ndcs, orders_df$NDC[i])
+    }
+  }
+  orders_df2 <- data.frame(OrderNum = ids, NDC = ndcs, NFCID = as.integer(nfc_nums))
   
-  nfcid_order_df <- full_join(orders_df[, -1], pt_df2[, -1])
+  nfcid_order_df <- full_join(orders_df2, pt_df2[, -1])
   current_loc <- history_df[length(history_df$NFCID)-match(unique(history_df$NFCID),rev(history_df$NFCID))+1, ]
   
   status_df <- full_join(nfcid_order_df[, -2], current_loc)
@@ -54,7 +70,7 @@ shinyServer(function(input, output) {
   }
 
   output$table <- renderDataTable({
-    datatable(status_df[, -c(2:5, 7)]) %>% # populate table with unit dose travel history
+    datatable(status_df) %>% # populate table with unit dose travel history
       formatStyle(
         'status',
         backgroundColor = styleEqual(c('in transit', 'arrived'), c('gray', 'green'))
